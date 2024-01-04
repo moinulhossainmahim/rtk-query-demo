@@ -3,6 +3,10 @@ import { useGetPostsQuery } from "./redux/services/postsApi"
 
 function App() {
   const { data: posts = [] } = useGetPostsQuery();
+  // const [addPost, { isLoading, isSuccess }] = useCreatePostMutation()
+  // const [deletePost] = useDeletePostMutation();
+  // const [updatePost] = useUpdatePostMutation();
+
 
   return (
     <>

@@ -11,7 +11,7 @@ export const postsApi = createApi({
       providesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
 
-    createPost: builder.mutation({
+    createPost: builder.mutation<Post, Post[]>({
       query: (title) => ({
         url: '/',
         method: 'POST',
@@ -20,21 +20,21 @@ export const postsApi = createApi({
       invalidatesTags: ['Posts'],
     }),
 
-    updatePost: builder.mutation({
+    updatePost: builder.mutation<Post, Post>({
       query: ({ id, title }) => ({
         url: `/${id}`,
         method: 'PUT',
         body: { title },
       }),
-      invalidatesTags: ['Posts'],
+      invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
 
-    deletePost: builder.mutation({
-      query: (id) => ({
-        url: `/${id}`,
+    deletePost: builder.mutation<Post, Post>({
+      query: (post) => ({
+        url: `/${post.id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Posts'],
+      invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
     }),
   })
 })
